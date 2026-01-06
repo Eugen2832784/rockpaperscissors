@@ -3,13 +3,12 @@ function getComputerChoice() {
   switch (compChoice) {
     case 1:
       return "камень";
-      break;
+
     case 2:
       return "ножницы";
-      break;
+
     case 3:
       return "бумага";
-      break;
   }
 }
 
@@ -20,41 +19,40 @@ function getHumanChoice() {
 }
 
 function playGame() {
-  let humanChoice = getHumanChoice();
-  let compChoice = getComputerChoice();
-  let humanScore = 0;
-  let computerScore = 0;
-  while (humanScore != 3 || computerScore != 3) {
-    console.log(playRound(getHumanChoice(), getComputerChoice()));
+  const score = { human: 0, computer: 0 };
+  while (score.human !== 3 && score.computer !== 3) {
+    const humanChoice = getHumanChoice();
+    const compChoice = getComputerChoice();
+    console.log(playRound(humanChoice, compChoice, score));
   }
-  if (humanScore == 3) {
+  if (score.human === 3) {
     console.log("Вы победили, поздравляю!");
-  } else if (computerScore == 3) {
+  } else if (score.computer === 3) {
     console.log("Вы проиграли");
   }
 }
 
-function playRound(humanChoice, compChoice) {
-  if (humanChoice == compChoice) {
+function playRound(humanChoice, compChoice, score) {
+  if (humanChoice === compChoice) {
     return "Ничья";
-  } else if (humanChoice == "камень" && compChoice == "бумага") {
-    computerScore++;
-    return `Вы проиграли, у меня ${compChoice}\nТеперь счет ${humanScore} : ${computerScore}`;
-  } else if (humanChoice == "ножницы" && compChoice == "камень") {
-    computerScore++;
-    return `Вы проиграли, у меня ${compChoice}\nТеперь счет ${humanScore} : ${computerScore}`;
-  } else if (humanChoice == "бумага" && compChoice == "ножницы") {
-    computerScore++;
-    return `Вы проиграли, у меня ${compChoice}\nТеперь счет ${humanScore} : ${computerScore}`;
-  } else if (humanChoice == "ножницы" && compChoice == "бумага") {
-    humanScore++;
-    return `Вы выиграли, у меня ${compChoice}\nТеперь счет ${humanScore} : ${computerScore}`;
-  } else if (humanChoice == "камень" && compChoice == "ножницы") {
-    humanScore++;
-    return `Вы проиграли, у меня ${compChoice}\nТеперь счет ${humanScore} : ${computerScore}`;
-  } else if (humanChoice == "бумага" && compChoice == "камень") {
-    humanScore++;
-    return `Вы проиграли, у меня ${compChoice}\nТеперь счет ${humanScore} : ${computerScore}`;
+  } else if (humanChoice === "камень" && compChoice === "бумага") {
+    score.computer++;
+    return `Вы проиграли, у меня ${compChoice}\nТеперь счет ${score.human} : ${score.computer}`;
+  } else if (humanChoice === "ножницы" && compChoice === "камень") {
+    score.computer++;
+    return `Вы проиграли, у меня ${compChoice}\nТеперь счет ${score.human} : ${score.computer}`;
+  } else if (humanChoice === "бумага" && compChoice === "ножницы") {
+    score.computer++;
+    return `Вы проиграли, у меня ${compChoice}\nТеперь счет ${score.human} : ${score.computer}`;
+  } else if (humanChoice === "ножницы" && compChoice === "бумага") {
+    score.human++;
+    return `Вы выиграли, у меня ${compChoice}\nТеперь счет ${score.human} : ${score.computer}`;
+  } else if (humanChoice === "камень" && compChoice === "ножницы") {
+    score.human++;
+    return `Вы выиграли, у меня ${compChoice}\nТеперь счет ${score.human} : ${score.computer}`;
+  } else if (humanChoice === "бумага" && compChoice === "камень") {
+    score.human++;
+    return `Вы выиграли, у меня ${compChoice}\nТеперь счет ${score.human} : ${score.computer}`;
   }
 }
 
